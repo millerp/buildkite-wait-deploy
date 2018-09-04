@@ -1,0 +1,29 @@
+# Build customization
+project_name: DeployEvents
+archive:
+  name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+  wrap_in_directory: true
+
+builds:
+  -
+    binary: client
+    main: ./client/main.go
+    goos:
+      - linux
+    goarch:
+      - amd64
+    ldflags: -s -w
+  -
+    binary: server
+    main: ./server/main.go
+    goos:
+    - linux
+    goarch:
+    - amd64
+    ldflags: -s -w
+
+release:
+  draft: false
+  prerelease: false
+  name_template: "{{.ProjectName}}-v{{.Version}}"
+  disable: true
