@@ -1,2 +1,4 @@
 .idea
 dist
+client/client
+client/server
