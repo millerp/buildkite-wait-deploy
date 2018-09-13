@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	AppKey = "65e885d06c3606bfce03"
+	AppKey = "349519f1474cd2dfcf8e"
 )
 
 type DeployInfo struct {

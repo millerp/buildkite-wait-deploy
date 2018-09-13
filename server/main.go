@@ -59,9 +59,9 @@ func DeployHandler(w http.ResponseWriter, r *http.Request) {
 
 	// instantiate a client
 	client := pusher.Client{
-		AppId:   "497217",
-		Key:     "65e885d06c3606bfce03",
-		Secret:  "0a0135c2586d11a901a3",
+		AppId:   "387102",
+		Key:     "349519f1474cd2dfcf8e",
+		Secret:  "0d83d7603e89a5a855a0",
 		Cluster: "us2",
 	}
 
