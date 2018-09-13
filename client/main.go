@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"flag"
 	"github.com/toorop/go-pusher"
 	"log"
 	"os"
@@ -19,11 +18,10 @@ type DeployInfo struct {
 
 var deploy DeployInfo
 
+var commit = os.Getenv("BUILDKITE_COMMIT")
 func main() {
-
-	var commit string
-	flag.StringVar(&commit, "commit", "", "Commit ID")
-	flag.Parse()
+	//flag.StringVar(&commit, "commit", os.Getenv("BUILDKITE_COMMIT"), "Commit ID")
+	//flag.Parse()
 
 INIT:
 	log.Println("init...")
@@ -77,7 +75,7 @@ INIT:
 
 func LogWaitDeploy() {
 
-	log.Println("Waiting deploy")
+	log.Println("Waiting deploy. Commit: ", commit)
 
 	time.AfterFunc(5*time.Second, func() {
 		LogWaitDeploy()

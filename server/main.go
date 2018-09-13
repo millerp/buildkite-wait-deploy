@@ -66,7 +66,6 @@ func DeployHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := map[string]string{"commit": deploy.Revision}
-
 	// trigger an event on a channel, along with a data payload
 	client.Trigger("deploy-notifications", "deploy", data)
 

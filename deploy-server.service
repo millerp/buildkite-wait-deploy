@@ -1,0 +1,13 @@
+[Unit]
+Description=Wait Deploy Server
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=ubuntu
+ExecStart=/home/ubuntu/deploy-server
+
+[Install]
+WantedBy=multi-user.target
