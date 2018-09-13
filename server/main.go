@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -24,7 +25,28 @@ type DeploySource struct {
 	Server      string `json: "server"`
 }
 
+var PusherAppId = os.Getenv("PUSHER_APP_ID")
+var PusherKey = os.Getenv("PUSHER_KEY")
+var PusherSecret = os.Getenv("PUSHER_SECRET")
+var PusherCluster = os.Getenv("PUSHER_CLUSTER")
+
 func main() {
+
+	if PusherAppId == "" {
+		log.Fatal("Env PUSHER_APP_ID is Empty")
+	}
+
+	if PusherKey == "" {
+		log.Fatal("Env PUSHER_KEY is Empty")
+	}
+
+	if PusherSecret == "" {
+		log.Fatal("Env PUSHER_SECRET is Empty")
+	}
+
+	if PusherCluster == "" {
+		log.Fatal("Env PUSHER_CLUSTER is Empty")
+	}
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", HomeHandler)
@@ -38,6 +60,8 @@ func main() {
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
+
+	log.Println("Starting Web Server port: 8000")
 
 	log.Fatal(srv.ListenAndServe())
 }
@@ -59,10 +83,10 @@ func DeployHandler(w http.ResponseWriter, r *http.Request) {
 
 	// instantiate a client
 	client := pusher.Client{
-		AppId:   "387102",
-		Key:     "349519f1474cd2dfcf8e",
-		Secret:  "0d83d7603e89a5a855a0",
-		Cluster: "us2",
+		AppId:   PusherAppId,
+		Key:     PusherKey,
+		Secret:  PusherSecret,
+		Cluster: PusherCluster,
 	}
 
 	data := map[string]string{"commit": deploy.Revision}
