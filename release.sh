@@ -32,4 +32,7 @@ fi
 goreleaser release --rm-dist
 
 cp dist/linux_amd64/deploy-server server/bin
-cp dist/linux_amd64/deploy-client client/bin
+cp dist/linux_amd64/wait-deploy-client client/bin
+
+git add .
+git commit -a -m "update binary"
