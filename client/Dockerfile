@@ -1,14 +1,10 @@
-FROM golang:1.11-alpine
+FROM golang:1.11
 
-WORKDIR /go/src/app
+WORKDIR /go/src/deploy-client
 
-RUN apk add --update git
-
-COPY docker/ipe/ .
+COPY main.go main.go
 
 RUN go get -d -v .
 RUN go install -v .
 
-CMD app -logtostderr=true -v=2
-
-EXPOSE 36511
+CMD deploy-client

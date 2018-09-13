@@ -8,20 +8,23 @@ import (
 	"time"
 )
 
-const (
-	AppKey = "349519f1474cd2dfcf8e"
-)
-
 type DeployInfo struct {
 	Commit string `json: "commit"`
 }
 
 var deploy DeployInfo
-
+var AppKey = os.Getenv("PUSHER_APP_KEY")
 var commit = os.Getenv("BUILDKITE_COMMIT")
+
 func main() {
-	//flag.StringVar(&commit, "commit", os.Getenv("BUILDKITE_COMMIT"), "Commit ID")
-	//flag.Parse()
+
+	if AppKey == "" {
+		log.Fatalf("Env PUSHER_APP_KEY is empty")
+	}
+
+	if commit == "" {
+		log.Fatalf("Env BUILDKITE_COMMIT is empty")
+	}
 
 INIT:
 	log.Println("init...")
@@ -77,7 +80,7 @@ func LogWaitDeploy() {
 
 	log.Println("Waiting deploy. Commit: ", commit)
 
-	time.AfterFunc(5*time.Second, func() {
+	time.AfterFunc(30*time.Second, func() {
 		LogWaitDeploy()
 	})
 }
