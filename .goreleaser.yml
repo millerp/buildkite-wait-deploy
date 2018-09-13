@@ -6,7 +6,7 @@ archive:
 
 builds:
   -
-    binary: client
+    binary: wait-deploy-client
     main: ./client/main.go
     goos:
       - linux
@@ -14,7 +14,7 @@ builds:
       - amd64
     ldflags: -s -w
   -
-    binary: server
+    binary: deploy-server
     main: ./server/main.go
     goos:
     - linux
